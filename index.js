@@ -18,7 +18,7 @@ inquirer
       type: "input",
       name: "textcolor",
       message:
-        "What color would you like your text? (enter color name or a hexidecimal number)",
+        "What color would you like your text? (enter color name or an RGB value (ex: 250 123 247))",
     },
     {
       type: "checkbox",
@@ -33,26 +33,26 @@ inquirer
         "What color would you like your shape? (enter color name or an RGB value (ex: 250 123 247))",
     },
   ])
-  
+  // depending on which shape is chosen invokes proper class and creates file
   .then((data) => {
     if ((data.letters).length > 3) {
       throw new Error('Logo must be less than 3 characters long.');
     }
     if (data.shape == "Circle") {
       const circlelogo = new Circle(data.letters, data.textcolor, data.shapecolor);
-      fs.writeFile("./examples/logo.html", circlelogo.render(), (err) => {
+      fs.writeFile("./examples/logo.svg", circlelogo.render(), (err) => {
         err ? console.log(err) : console.log("New logo was created");
       });
     }
     else if (data.shape == "Square") {
       const squarelogo = new Square(data.letters, data.textcolor, data.shapecolor);
-      fs.writeFile("./examples/logo.html", squarelogo.render(), (err) => {
+      fs.writeFile("./examples/logo.svg", squarelogo.render(), (err) => {
         err ? console.log(err) : console.log("New logo was created");
       });
     }
     else if ((data.shape == "Triangle")) {
       const trianglelogo = new Triangle(data.letters, data.textcolor, data.shapecolor);
-      fs.writeFile("./examples/logo.html", trianglelogo.render(), (err) => {
+      fs.writeFile("./examples/logo.svg", trianglelogo.render(), (err) => {
         err ? console.log(err) : console.log("New logo was created");
       });
     }
