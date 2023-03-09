@@ -30,14 +30,29 @@ inquirer
       type: "input",
       name: "shapecolor",
       message:
-        "What color would you like your shape? (enter color name or a hexidecimal number)",
+        "What color would you like your shape? (enter color name or an RGB value (ex: 250 123 247))",
     },
   ])
+  
   .then((data) => {
-    if ((data.shape = "Circle")) {
-      const newlogo = new Circle(data.letters, data.textcolor, data.shapecolor);
-      console.log(newlogo);
-      fs.writeFile("./examples/logo.html", newlogo.render(), (err) => {
+    if ((data.letters).length > 3) {
+      throw new Error('Logo must be less than 3 characters long.');
+    }
+    if (data.shape == "Circle") {
+      const circlelogo = new Circle(data.letters, data.textcolor, data.shapecolor);
+      fs.writeFile("./examples/logo.html", circlelogo.render(), (err) => {
+        err ? console.log(err) : console.log("New logo was created");
+      });
+    }
+    else if (data.shape == "Square") {
+      const squarelogo = new Square(data.letters, data.textcolor, data.shapecolor);
+      fs.writeFile("./examples/logo.html", squarelogo.render(), (err) => {
+        err ? console.log(err) : console.log("New logo was created");
+      });
+    }
+    else if ((data.shape == "Triangle")) {
+      const trianglelogo = new Triangle(data.letters, data.textcolor, data.shapecolor);
+      fs.writeFile("./examples/logo.html", trianglelogo.render(), (err) => {
         err ? console.log(err) : console.log("New logo was created");
       });
     }
